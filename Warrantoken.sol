@@ -106,68 +106,6 @@ contract Warrantoken {
   }
 }
 
-/*
-0x9a7464d1ec3ba4f478c660936447993f11d6ca67
-
-web3.personal.unlockAccount(web3.eth.accounts[0], 'password', 1500000)
-
-web3.eth.defaultAccount=web3.eth.accounts[0]
-var c = web3.eth.contract([{"constant":false,"inputs":[{"name":"warrantyIdentifier","type":"uint"},{"name":"newOwner","type":"address"}],"name":"transferWarranty","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint"}],"name":"items","outputs":[{"name":"identifier","type":"uint"},{"name":"owner","type":"address"},{"name":"creator","type":"address"},{"name":"itemRegistered","type":"uint"},{"name":"itemName","type":"string"},{"name":"itemDescription","type":"string"},{"name":"itemWarranty","type":"string"},{"name":"itemThumbnailURL","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[{"name":"myItemName","type":"string"},{"name":"myItemDescription","type":"string"},{"name":"myItemWarranty","type":"string"},{"name":"myItemThumbnailURL","type":"string"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"name":"indentifier","type":"uint"},{"indexed":true,"name":"owner","type":"address"}],"name":"WarrantyTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"indentifier","type":"uint"},{"indexed":true,"name":"owner","type":"address"},{"indexed":true,"name":"itemName","type":"string"}],"name":"WarrantyCreated","type":"event"}])
-
-
-var c = web3.eth.contract([{"constant": false,"inputs": [{"name": "warrantyIdentifier","type": "uint"},{"name": "newOwner","type": "address"}],"name": "transferWarranty","outputs": [],"payable": false,"stateMutability": "nonpayable","type": "function"},{"constant": false,"inputs": [{"name": "myItemName","type": "string"},{"name": "myItemDescription","type": "string"},{"name": "myItemWarranty","type": "string"},{"name": "myItemThumbnailURL","type": "string"}],"name": "createWarranty","outputs": [],"payable": false,"stateMutability": "nonpayable","type": "function"},{"constant": true,"inputs": [{"name": "","type": "uint"}],"name": "items","outputs": [{"name": "identifier","type": "uint"},{"name": "owner","type": "address"},{"name": "creator","type": "address"},{"name": "itemRegistered","type": "uint"},{"name": "itemName","type": "string"},{"name": "itemDescription","type": "string"},{"name": "itemWarranty","type": "string"},{"name": "itemThumbnailURL","type": "string"}],"payable": false,"stateMutability": "view","type": "function"},{"anonymous": false,"inputs": [{"indexed": true,"name": "indentifier","type": "uint"},{"indexed": true,"name": "owner","type": "address"}],"name": "WarrantyTransferred","type": "event"},{"anonymous": false,"inputs": [{"indexed": true,"name": "indentifier","type": "uint"},{"indexed": true,"name": "owner","type": "address"},{"indexed": true,"name": "itemName","type": "string"}],"name": "WarrantyCreated","type": "event"}]);
-
-var d = c.at(0x9a7464d1ec3ba4f478c660936447993f11d6ca67)
-
-web3.personal.unlockAccount('0x39d752db6193c5c7Ec0dA08116c6be63D6C6c465', "password", 1500000, function(e,c){})
-
-
-
-
-
-d.transferWarranty.call(1, '0x39d752db6193c5c7Ec0dA08116c6be63D6C6c465').set({from: '0x39d752db6193c5c7Ec0dA08116c6be63D6C6c465'});   , {from:web3.eth.accounts[0]})
-//not working. 
-d.transferWarranty.call(100000000000, 0x39d752db6193c5c7Ec0dA08116c6be63D6C6c465, {from:0x39d752db6193c5c7Ec0dA08116c6be63D6C6c465})
-d.transferWarranty(100000000000, 0x39d752db6193c5c7Ec0dA08116c6be63D6C6c465, {from:0x39d752db6193c5c7Ec0dA08116c6be63D6C6c465})
-d.transferWarranty.sendTransaction({from:web3.eth.accounts[0], data:'0x90581cdb000000000000000000000000000000000000000000000000000000000000000100000000000000000000000039d752db6193c6321f47ed55ca77d5ed00000000'})
-
-eth.sendTransaction({from:web3.eth.accounts[0], data:'0x90581cdb000000000000000000000000000000000000000000000000000000000000000100000000000000000000000039d752db6193c6321f47ed55ca77d5ed00000000', to:'0x55f83524b525945ed24a3cee5c0edf75dcb5f0b1'})
-d.transferWarranty.sendTransaction({from:web3.eth.accounts[0], data:'0x90581cdb000000000000000000000000000000000000000000000000000000000000000100000000000000000000000039d752db6193c6321f47ed55ca77d5ed00000000', to:'0x55f83524b525945ed24a3cee5c0edf75dcb5f0b1'}, function(err,c){ console.log(err,c); })
-
-web3.personal.unlockAccount(web3.eth.defaultAccount, "password", 150000000, function(err, result) {console.log(result) });
-0xb94105B676e256639560369566f4C670e0546F000
-
-acc = '0x39d752db6193c5c7Ec0dA08116c6be63D6C6c465';
-
-
-
-
-Warrantoken.deployed().then(inst => { w = inst });
-var p = web3.sha3("password");
-w.createWarranty(p)
-w.getWarranty(0)
-
-w.registerWarranty(0, "password", '0x39d752db6193c5c7Ec0dA08116c6be63D6C6c465')
-
-w.transferWarranty(0, 0x9eab32c718b3291d0351792a6af96bff7ae46297)
-
-
-w.transferWarranty(0, '0x9eab32c718b3291d0351792a6af96bff7ae46297').then(function(res){ console.log("AAA", res.logs[0].args); });
-
-TMR: Listen for events and get the response after transaction with ID. vendor can check ID and user can save. 
-w.allEvents(function(event) {  console.log(event); });
-ev = w.WarrantyTransferred({warrantyIdentifier:0})
-ev.watch(function(error, result){ console.log("aAAA", result); });
-ev.get(function(error, logs){ console.log(logs); });
-w.allEvents([])
-
-deployed on rinkeby: 0xa66e42068c375d0b82197e630d68b9d9d2d31b79
-*/
-
-
-
-
-
 
 
 
